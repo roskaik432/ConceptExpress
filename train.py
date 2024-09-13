@@ -1,4 +1,5 @@
 """
+Rami
 Modified from:
     Break-A-Scene: https://github.com/google/break-a-scene
 """
@@ -1198,7 +1199,8 @@ class ConceptExpress:
                         ).input_ids
 
                         # Get the text embedding for conditioning
-                        encoder_hidden_states = self.text_encoder(null_input_ids)[0]
+                        #encoder_hidden_states = self.text_encoder(null_input_ids)[0]
+                        encoder_hidden_states = self.text_encoder(null_input_ids.to(self.text_encoder.device))[0]
 
                         # Predict the noise residual
                         model_pred = self.unet(
@@ -1325,7 +1327,8 @@ class ConceptExpress:
                         )
 
                         # Get the text embedding for conditioning
-                        encoder_hidden_states = self.text_encoder(prompt_ids)[0]
+                        #encoder_hidden_states = self.text_encoder(prompt_ids)[0]
+                        encoder_hidden_states = self.text_encoder(prompt_ids.to(self.text_encoder.device))[0] # modified Rami
                         # Predict the noise residual
                         model_pred = self.unet(
                             noisy_latents, timesteps, encoder_hidden_states
